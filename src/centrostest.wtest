@@ -1,0 +1,35 @@
+import geografia.*
+import distribucion.*
+import clientes.*
+import vendedores.*
+test "testCentros" {
+	const rosario = new Ciudad(habitantes=8000)
+	const lobos = new Ciudad(habitantes=3000)
+	const centro1 = new Distribucion(origen=rosario)
+	const certificado1 = new DeProducto(puntos=14)
+	const certificado2 = new NoProducto(puntos=3)
+	const certificado3 = new NoProducto(puntos=5)
+	const certificado4 = new DeProducto(puntos=10)
+	const vendedor1 = new VendedorFijo(lugTrabajo=rosario)
+	const vendedor2 = new VendedorFijo(lugTrabajo=lobos)
+	const vendedor3 = new VendedorFijo(lugTrabajo=lobos)
+	vendedor1.agregarCertificado(certificado1)
+	vendedor1.agregarCertificado(certificado2)
+	vendedor1.agregarCertificado(certificado3)
+	vendedor1.agregarCertificado(certificado4)
+	vendedor2.agregarCertificado(certificado2)
+	vendedor2.agregarCertificado(certificado3)
+	vendedor2.agregarCertificado(certificado4)
+	vendedor3.agregarCertificado(certificado3)
+	vendedor3.agregarCertificado(certificado4)
+	centro1.agregarVendedor(vendedor1)
+	centro1.agregarVendedor(vendedor2)
+	centro1.agregarVendedor(vendedor3)
+	
+	assert.that(centro1.estaElVendedor(vendedor2))
+	assert.equals(vendedor1,centro1.vendEstrella())
+	assert.that(centro1.cubrir(lobos))
+	assert.that(centro1.genericos())
+	assert.notThat(centro1.robusto())
+
+}

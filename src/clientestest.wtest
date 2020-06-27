@@ -1,0 +1,26 @@
+import geografia.*
+import distribucion.*
+import clientes.*
+import vendedores.*
+test "testClientes" {
+	const inseguro1 = new Inseguro()
+	const certificado1 = new DeProducto(puntos=14)
+	const certificado2 = new NoProducto(puntos=3)
+	const certificado3 = new NoProducto(puntos=5)
+	const certificado4 = new DeProducto(puntos=10)
+	const vendedor1 = new VendedorFijo()
+	vendedor1.agregarCertificado(certificado1)
+	vendedor1.agregarCertificado(certificado2)
+	vendedor1.agregarCertificado(certificado3)
+	vendedor1.agregarCertificado(certificado4)
+	assert.that(inseguro1.puedeSerAtendido(vendedor1))
+	
+	const detallista1 = new Detallista()
+	
+	assert.notThat(detallista1.puedeSerAtendido(vendedor1))
+	
+	const humanista1 = new Humanista()
+	
+	assert.that(humanista1.puedeSerAtendido(vendedor1))
+
+}

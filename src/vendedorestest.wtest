@@ -1,0 +1,47 @@
+import vendedores.*
+import geografia.*
+test "testVendedores" {
+	const chivilcoy = new Ciudad(habitantes=8000)
+	const bragado = new Ciudad(habitantes=5000)
+	const lobos = new Ciudad(habitantes=3000)
+	const pergamino = new Ciudad(habitantes=3200)
+	const zarate = new Ciudad(habitantes=4563)
+	const buenosAires = new Provincia()
+	buenosAires.agregarCiudad(lobos)
+	buenosAires.agregarCiudad(chivilcoy)
+	buenosAires.agregarCiudad(bragado)
+	buenosAires.agregarCiudad(zarate)
+	buenosAires.agregarCiudad(pergamino)
+	const byMoro = new Corresponsal()
+	byMoro.agregarProvincia(buenosAires)
+	
+	assert.that(byMoro.influyente())
+	
+	const rosario = new Ciudad(habitantes=8000)
+	const rafaela = new Ciudad(habitantes=8000)
+	const sanFrancisco = new Ciudad(habitantes=8000)
+	const diamante = new Ciudad(habitantes=8000)
+	const santaFe = new Provincia()
+	const cordoba = new Provincia()
+	const entreRios = new Provincia()
+	santaFe.agregarCiudad(rosario)
+	santaFe.agregarCiudad(rafaela)
+	cordoba.agregarCiudad(sanFrancisco)
+	entreRios.agregarCiudad(diamante)
+	const moro = new Corresponsal()
+	moro.agregarProvincia(santaFe)
+	moro.agregarProvincia(cordoba)
+	moro.agregarProvincia(entreRios)
+	
+	assert.that(moro.influyente())
+	
+	const amstrong = new Ciudad(habitantes=8000)
+	santaFe.agregarCiudad(amstrong)
+	const fravega = new Corresponsal()
+	fravega.agregarProvincia(santaFe)
+	fravega.agregarProvincia(entreRios)
+	
+	assert.notThat(fravega.influyente())
+	
+	
+	}
