@@ -33,7 +33,9 @@ class Vendedor {
 	method esFisica(){
 		return fisica.fisic()
 	}
-	
+	method esCandidato(cent){
+		return self.versatil() and self.afinidad(cent)
+	}
 }
 class VendedorFijo inherits Vendedor{
 	var property lugTrabajo=null

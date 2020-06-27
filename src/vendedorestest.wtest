@@ -1,5 +1,6 @@
 import vendedores.*
 import geografia.*
+import distribucion.*
 test "testVendedores" {
 	const chivilcoy = new Ciudad(habitantes=8000)
 	const bragado = new Ciudad(habitantes=5000)
@@ -43,5 +44,43 @@ test "testVendedores" {
 	
 	assert.notThat(fravega.influyente())
 	
+	const vendedor1 = new VendedorFijo()
+	const certificado1 = new DeProducto(puntos=14)
+	const certificado2 = new NoProducto(puntos=3)
+	const certificado3 = new NoProducto(puntos=5)
+	const certificado4 = new DeProducto(puntos=10)
+	vendedor1.lugTrabajo(rafaela)
+	vendedor1.agregarCertificado(certificado1)
+	vendedor1.agregarCertificado(certificado2)
+	vendedor1.agregarCertificado(certificado3)
+	vendedor1.agregarCertificado(certificado4)
+	const centro1 = new Distribucion(origen=rosario)
 	
-	}
+	assert.that(vendedor1.versatil())
+	assert.equals(4,vendedor1.cantCertificados())
+	assert.equals(2,vendedor1.certificadosProd())
+	assert.equals(2,vendedor1.certificadosNoProd())
+	assert.that(vendedor1.esFirme())
+	assert.equals(32,vendedor1.certificadosPunt())
+	assert.notThat(vendedor1.influyente())
+	assert.notThat(vendedor1.afinidad(centro1))
+	assert.that(vendedor1.esFisica())
+	assert.notThat(vendedor1.esCandidato(centro1))
+	
+	const vendedor2 = new Viajante()
+	vendedor2.agregarProvincia(buenosAires)
+	
+	assert.notThat(vendedor2.trabajarEn(rosario))
+	assert.notThat(vendedor2.influyente())
+	assert.equals(23763,vendedor2.totalPobCiudades())
+	
+	byMoro.agregarCertificado(certificado1)
+	byMoro.agregarCertificado(certificado2)
+	byMoro.agregarCertificado(certificado3)
+	byMoro.agregarCertificado(certificado4)
+	
+	assert.equals(5,byMoro.cantCiudades())
+	assert.equals(1,byMoro.cantProvincia())
+	assert.notThat(byMoro.afinidad(centro1))
+	assert.notThat(byMoro.esFisica())
+}

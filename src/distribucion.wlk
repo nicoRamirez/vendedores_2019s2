@@ -28,9 +28,6 @@ class Distribucion {
 	method repartirCert(cert){
 		vendedores.forEach({vendedor=>vendedor.agregarCertificado(cert)})
 	}
-	method esCandidato(vend){
-		return vend.versatil() and vend.afinidad(self)
-	}
 	
 }
 class Certificado{
